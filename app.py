@@ -1,13 +1,19 @@
-from quotes_scraper import QuotesScraper
+from flask import Flask
 from quotes_model import QuotesModel
-
-scraper = QuotesScraper(verbose=True)
-scraper.scrape('quotes.json', 5, 25)
+import json
 
 model = QuotesModel()
-quotes = model.load_quotes('quotes.json')
-model.train(quotes, 'model.json')
 model.load_model('model.json')
-quote = model.generate()
-print(quote)
 
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return 'temp index page'
+
+@app.route('/quote')
+def quote():
+    quote = model.generate()
+    return json.dumps({'quote': quote})
+
+app.run(debug=True)
