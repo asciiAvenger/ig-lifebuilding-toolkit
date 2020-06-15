@@ -34,14 +34,10 @@ class QuotesScraper:
         # clean quotes
         for i, quote in enumerate(quotes):
             quotes[i] = quote.replace('xe2x80x99', '\'')
-            if 'xd' in quote:
+            if 'xd' in quote or '2x' in quote:
                 del quotes[i]
 
         with open(output, 'w') as f:
             if self.verbose:
                 print('Writing {}'.format(output))
             json.dump(quotes, f)
-
-
-# scraper = QuotesScraper(verbose=True)
-# scraper.scrape('quotes.json', start_page=1, end_page=20)

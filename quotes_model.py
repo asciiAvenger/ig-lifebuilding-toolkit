@@ -59,11 +59,3 @@ class QuotesModel:
             generated.append(random.choice(words))
         quote = ' '.join(generated)
         return quote
-
-
-# model = QuotesModel()
-# quotes = model.load_quotes('quotes.json')
-# model.train(quotes, 'model.json')
-# model.load_model('model.json')
-# quote = model.generate()
-# print(quote)
